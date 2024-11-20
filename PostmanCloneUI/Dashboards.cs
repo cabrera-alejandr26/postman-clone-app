@@ -8,6 +8,7 @@ public partial class Dashboards : Form
     public Dashboards()
     {
         InitializeComponent();
+        httpVerbSelection.SelectedItem = "GET";
     }
 
     private void Dashboards_Load(object sender, EventArgs e)
@@ -27,18 +28,24 @@ public partial class Dashboards : Form
 
 
         //Validate the API URL 
-        if (api.IsValidUrl(apiText.Text) == false) 
+        if (api.IsValidUrl(apiText.Text) == false)
         {
             systemStatus.Text = "Invalid URL...";
             return;
         }
 
+        HttpAction action;
+        if (Enum.TryParse(httpVerbSelection.SelectedItem!.ToString(), out action) == false)
+        {
+            systemStatus.Text = "Invalid HTTP Verb";
+            return;
+        }
+
         try
         {
-            
-
-            resultText.Text = await api.CallApiAsync(apiText.Text);
-
+            resultText.Text = await api.CallApiAsync(apiText.Text, bodyText.Text, action);
+            callData.SelectedTab = outputTab;// Switches to Output tab once we press the Go button
+            outputTab.Focus();
             systemStatus.Text = "Ready";
         }
         catch (Exception ex)
@@ -50,10 +57,30 @@ public partial class Dashboards : Form
 
     private void resultText_TextChanged(object sender, EventArgs e)
     {
-        
+
     }
 
     private void statusStrip_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+    {
+
+    }
+
+    private void resultsLabel_Click(object sender, EventArgs e)
+    {
+
+    }
+
+    private void apiLabel_Click(object sender, EventArgs e)
+    {
+
+    }
+
+    private void httpVerbSelection_SelectedIndexChanged(object sender, EventArgs e)
+    {
+
+    }
+
+    private void resultText_TextChanged_1(object sender, EventArgs e)
     {
 
     }
