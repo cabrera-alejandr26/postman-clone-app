@@ -31,7 +31,7 @@ public partial class Dashboards : Form
         resultText.Text = "";
 
 
-        //Validate the API URL 
+        // Validate the API URL 
         if (api.IsValidUrl(apiText.Text) == false)
         {
             systemStatus.Text = "Invalid URL...";
@@ -48,10 +48,17 @@ public partial class Dashboards : Form
         // Parse headers
         var headers = ParseHeaders(headerText.Text);
         
+        // Extract API key if provided
+        string apiKey = apiKeyTextBox.Text.Trim();
+        if (!string.IsNullOrEmpty(apiKey))
+        {
+            headers["Authorization"] = $"Bearer {apiKey}";
+        }
+
         try
         {
             resultText.Text = await api.CallApiAsync(apiText.Text, bodyText.Text, action, true, headers);
-            callData.SelectedTab = outputTab;// Switches to Output tab once we press the Go button
+            callData.SelectedTab = outputTab; // Switches to Output tab once we press the Go button
             outputTab.Focus();
             systemStatus.Text = "Ready";
         }
@@ -72,7 +79,7 @@ public partial class Dashboards : Form
             var parts = line.Split(':');
             if (parts.Length == 2)
             {
-                headers.Add(parts[0].Trim(), parts[1].Trim());//Add the api key and password to the headers dictionary
+                headers.Add(parts[0].Trim(), parts[1].Trim());
             }
         }
 

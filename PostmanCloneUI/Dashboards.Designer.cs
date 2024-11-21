@@ -42,11 +42,14 @@
             resultText = new TextBox();
             headerTab = new TabPage();
             headerText = new TextBox();
+            apiKeyTab = new TabPage();
+            apiKeyTextBox = new TextBox();
             statusStrip.SuspendLayout();
             callData.SuspendLayout();
             bodyTab.SuspendLayout();
             outputTab.SuspendLayout();
             headerTab.SuspendLayout();
+            apiKeyTab.SuspendLayout();
             SuspendLayout();
             // 
             // formHeader
@@ -75,7 +78,7 @@
             // 
             apiText.BackColor = SystemColors.InactiveCaption;
             apiText.BorderStyle = BorderStyle.FixedSingle;
-            apiText.Location = new Point(216, 116);
+            apiText.Location = new Point(225, 115);
             apiText.Name = "apiText";
             apiText.Size = new Size(483, 39);
             apiText.TabIndex = 2;
@@ -124,6 +127,7 @@
             callData.Controls.Add(bodyTab);
             callData.Controls.Add(outputTab);
             callData.Controls.Add(headerTab);
+            callData.Controls.Add(apiKeyTab);
             callData.Location = new Point(89, 195);
             callData.Name = "callData";
             callData.SelectedIndex = 0;
@@ -200,6 +204,28 @@
             headerText.Size = new Size(731, 307);
             headerText.TabIndex = 6;
             // 
+            // apiKeyTab
+            // 
+            apiKeyTab.Controls.Add(apiKeyTextBox);
+            apiKeyTab.Location = new Point(4, 41);
+            apiKeyTab.Name = "apiKeyTab";
+            apiKeyTab.Size = new Size(731, 307);
+            apiKeyTab.TabIndex = 3;
+            apiKeyTab.Text = "API Key";
+            apiKeyTab.UseVisualStyleBackColor = true;
+            // 
+            // apiKeyTextBox
+            // 
+            apiKeyTextBox.BackColor = SystemColors.InactiveCaption;
+            apiKeyTextBox.BorderStyle = BorderStyle.FixedSingle;
+            apiKeyTextBox.Dock = DockStyle.Fill;
+            apiKeyTextBox.Location = new Point(0, 0);
+            apiKeyTextBox.Multiline = true;
+            apiKeyTextBox.Name = "apiKeyTextBox";
+            apiKeyTextBox.ScrollBars = ScrollBars.Both;
+            apiKeyTextBox.Size = new Size(731, 307);
+            apiKeyTextBox.TabIndex = 7;
+            // 
             // Dashboards
             // 
             AutoScaleDimensions = new SizeF(13F, 32F);
@@ -227,6 +253,8 @@
             outputTab.PerformLayout();
             headerTab.ResumeLayout(false);
             headerTab.PerformLayout();
+            apiKeyTab.ResumeLayout(false);
+            apiKeyTab.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -247,5 +275,7 @@
         private TextBox bodyText;
         private TabPage headerTab;
         private TextBox headerText;
+        private TabPage apiKeyTab;
+        private TextBox apiKeyTextBox;
     }
 }
