@@ -1,4 +1,8 @@
 using PostmanCloneLibrary;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Windows.Forms;
 
 namespace PostmanCloneUI;
 
@@ -41,9 +45,12 @@ public partial class Dashboards : Form
             return;
         }
 
+        // Parse headers
+        var headers = ParseHeaders(headerText.Text);
+        
         try
         {
-            resultText.Text = await api.CallApiAsync(apiText.Text, bodyText.Text, action);
+            resultText.Text = await api.CallApiAsync(apiText.Text, bodyText.Text, action, true, headers);
             callData.SelectedTab = outputTab;// Switches to Output tab once we press the Go button
             outputTab.Focus();
             systemStatus.Text = "Ready";
@@ -53,6 +60,23 @@ public partial class Dashboards : Form
             resultText.Text = "Error: " + ex.Message;
             systemStatus.Text = "Error";
         }
+    }
+
+    private Dictionary<string, string> ParseHeaders(string headersText)
+    {
+        var headers = new Dictionary<string, string>();
+        var lines = headersText.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
+        
+        foreach (var line in lines)
+        {
+            var parts = line.Split(':');
+            if (parts.Length == 2)
+            {
+                headers.Add(parts[0].Trim(), parts[1].Trim());//Add the api key and password to the headers dictionary
+            }
+        }
+
+        return headers;
     }
 
     private void resultText_TextChanged(object sender, EventArgs e)
