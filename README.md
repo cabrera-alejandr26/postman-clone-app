@@ -13,7 +13,7 @@ This app is an inspired clone of the original Postman app, which was created for
 ## Using The Postman Clone App:
 1. Download the executable file from the release section.
 2. When the application runs, the application should look like the image below:
-![Postman Clone App ready to run](Images/screenshot_1.png "Ready to Run")
+![Postman Clone App ready to run](Images/Main_Screenshot.png "Ready to Run")
 3. Paste in your API URL in the text box and then press the "Go" button.
 4. You should see a JSON text result in the "Results" text box if your call was successful, if not an error message will appear.
-![Postman Clone App results](Images/screenshot_2.png "Results")
+![Postman Clone App results](Images/GET_Cats.png "Results")
